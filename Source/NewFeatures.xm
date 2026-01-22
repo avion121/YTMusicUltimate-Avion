@@ -416,14 +416,128 @@ static NSInteger YTMUint(NSString *key) {
 }
 %end
 
+#pragma mark - Feature 6: Auto Clear Cache on App Close
+
+@interface YTMAppDelegate : UIResponder <UIApplicationDelegate>
+@end
+
+%hook YTMAppDelegate
+- (void)applicationWillTerminate:(UIApplication *)application {
+    %orig;
+    
+    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
+        [self clearCacheTo1KB];
+    }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    %orig;
+    
+    // Also clear cache when app goes to background (optional, but useful)
+    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
+        [self clearCacheTo1KB];
+    }
+}
+
+%new
+- (void)clearCacheTo1KB {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        if (!cachePath || !fileManager) return;
+        
+        NSError *error = nil;
+        NSArray *files = [fileManager contentsOfDirectoryAtPath:cachePath error:&error];
+        
+        if (error) {
+            NSLog(@"[YTMusicUltimate] Error reading cache directory: %@", error.localizedDescription);
+            return;
+        }
+        
+        // Calculate total size and remove files until we're under 1KB
+        unsigned long long totalSize = 0;
+        NSMutableArray *fileSizes = [NSMutableArray array];
+        
+        for (NSString *fileName in files) {
+            NSString *filePath = [cachePath stringByAppendingPathComponent:fileName];
+            NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:nil];
+            if (attributes) {
+                unsigned long long fileSize = [attributes fileSize];
+                totalSize += fileSize;
+                [fileSizes addObject:@{@"path": filePath, @"size": @(fileSize)}];
+            }
+        }
+        
+        // Sort by size (largest first) to remove biggest files first
+        [fileSizes sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+            NSNumber *size1 = obj1[@"size"];
+            NSNumber *size2 = obj2[@"size"];
+            return [size2 compare:size1];
+        }];
+        
+        // Remove files until we're under 1KB (1024 bytes)
+        const unsigned long long targetSize = 1024; // 1KB
+        
+        for (NSDictionary *fileInfo in fileSizes) {
+            if (totalSize <= targetSize) break;
+            
+            NSString *filePath = fileInfo[@"path"];
+            NSNumber *fileSize = fileInfo[@"size"];
+            
+            // Don't remove important system files or our own files
+            NSString *fileName = [filePath lastPathComponent];
+            if ([fileName hasPrefix:@"."] || 
+                [fileName isEqualToString:@"com.apple.nsurlsessiond"] ||
+                [filePath containsString:@"YTMusicUltimate"]) {
+                continue;
+            }
+            
+            NSError *removeError = nil;
+            if ([fileManager removeItemAtPath:filePath error:&removeError]) {
+                totalSize -= [fileSize unsignedLongLongValue];
+            }
+        }
+        
+        // If still over 1KB, create a small placeholder file to ensure we're at exactly 1KB
+        if (totalSize > targetSize) {
+            // Remove more aggressively
+            for (NSDictionary *fileInfo in fileSizes) {
+                if (totalSize <= targetSize) break;
+                
+                NSString *filePath = fileInfo[@"path"];
+                if ([fileManager fileExistsAtPath:filePath]) {
+                    NSNumber *fileSize = fileInfo[@"size"];
+                    NSError *removeError = nil;
+                    if ([fileManager removeItemAtPath:filePath error:&removeError]) {
+                        totalSize -= [fileSize unsignedLongLongValue];
+                    }
+                }
+            }
+        }
+        
+        // Create a small placeholder file if cache is empty to maintain 1KB
+        if (totalSize < targetSize) {
+            NSString *placeholderPath = [cachePath stringByAppendingPathComponent:@".ytmu_cache_placeholder"];
+            NSData *placeholderData = [NSData dataWithBytes:"YTMusicUltimate Cache Placeholder" length:32];
+            [placeholderData writeToFile:placeholderPath atomically:YES];
+        }
+        
+        NSLog(@"[YTMusicUltimate] Cache cleared. Final size: %llu bytes", totalSize);
+    });
+}
+%end
+
 %ctor {
     // Initialize settings defaults for new features
     NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"YTMUltimate"]];
     
-    NSArray *newKeys = @[@"alwaysHighQuality", @"skipDislikedSongs", @"discordRPC", @"preferAudioVersion"];
+    NSArray *newKeys = @[@"alwaysHighQuality", @"skipDislikedSongs", @"discordRPC", @"preferAudioVersion", @"autoClearCacheOnClose"];
     for (NSString *key in newKeys) {
         if (!YTMUltimateDict[key]) {
-            [YTMUltimateDict setObject:@(NO) forKey:key];
+            // Default autoClearCacheOnClose to YES, others to NO
+            BOOL defaultValue = [key isEqualToString:@"autoClearCacheOnClose"] ? YES : NO;
+            [YTMUltimateDict setObject:@(defaultValue) forKey:key];
         }
     }
     

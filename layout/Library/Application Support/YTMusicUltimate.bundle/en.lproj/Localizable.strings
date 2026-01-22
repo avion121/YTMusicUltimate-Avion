@@ -148,6 +148,9 @@
 "DISCORD_RPC" = "Discord Rich Presence";
 "DISCORD_RPC_DESC" = "Show currently playing song in Discord status";
 
+"AUTO_CLEAR_CACHE" = "Auto clear cache on close";
+"AUTO_CLEAR_CACHE_DESC" = "Automatically clears app cache to 1KB when app closes or goes to background";
+
 "BULK_DOWNLOAD" = "Bulk Download";
 "BULK_DOWNLOAD_DESC" = "Download all songs in this playlist";
 "DOWNLOAD_ALL_AUDIO" = "Download all audio";

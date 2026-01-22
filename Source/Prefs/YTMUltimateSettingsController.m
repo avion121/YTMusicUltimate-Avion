@@ -79,7 +79,7 @@
         case 1:
             return 5;
         case 2:
-            return 4; // Added: Import/Export settings, Discord RPC
+            return 5; // Added: Import/Export settings, Discord RPC, Auto Clear Cache
         case 3:
             return 4;
         default:
@@ -202,6 +202,27 @@
             switchControl.onTintColor = [UIColor colorWithRed:88/255.0 green:101/255.0 blue:242/255.0 alpha:1.0];
             [switchControl addTarget:self action:@selector(toggleDiscordRPC:) forControlEvents:UIControlEventValueChanged];
             switchControl.on = [YTMUltimateDict[@"discordRPC"] boolValue];
+            cell.accessoryView = switchControl;
+
+            return cell;
+        }
+        
+        if (indexPath.row == 4) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"autoClearCacheSection"];
+            
+            NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"YTMUltimate"]];
+
+            cell.textLabel.text = LOC(@"AUTO_CLEAR_CACHE");
+            cell.detailTextLabel.text = LOC(@"AUTO_CLEAR_CACHE_DESC");
+            cell.detailTextLabel.numberOfLines = 0;
+            cell.detailTextLabel.textColor = [UIColor secondaryLabelColor];
+            cell.imageView.image = [UIImage systemImageNamed:@"trash.circle"];
+            cell.imageView.tintColor = [UIColor systemOrangeColor];
+
+            ABCSwitch *switchControl = [[NSClassFromString(@"ABCSwitch") alloc] init];
+            switchControl.onTintColor = [UIColor systemOrangeColor];
+            [switchControl addTarget:self action:@selector(toggleAutoClearCache:) forControlEvents:UIControlEventValueChanged];
+            switchControl.on = [YTMUltimateDict[@"autoClearCacheOnClose"] boolValue];
             cell.accessoryView = switchControl;
 
             return cell;
@@ -357,6 +378,14 @@
     NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"YTMUltimate"]];
 
     [YTMUltimateDict setObject:@([sender isOn]) forKey:@"discordRPC"];
+    [defaults setObject:YTMUltimateDict forKey:@"YTMUltimate"];
+}
+
+- (void)toggleAutoClearCache:(UISwitch *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *YTMUltimateDict = [NSMutableDictionary dictionaryWithDictionary:[defaults dictionaryForKey:@"YTMUltimate"]];
+
+    [YTMUltimateDict setObject:@([sender isOn]) forKey:@"autoClearCacheOnClose"];
     [defaults setObject:YTMUltimateDict forKey:@"YTMUltimate"];
 }
 

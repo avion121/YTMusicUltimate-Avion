@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
+#import <objc/message.h>
 #import "Headers/YTPlayerViewController.h"
 #import "Headers/YTMWatchViewController.h"
 #import "Headers/YTMToastController.h"
@@ -109,14 +111,16 @@ static NSInteger YTMUint(NSString *key) {
 
 %new
 - (void)checkAndSkipDislikedSong {
-    id currentItem = [self valueForKey:@"_currentItem"];
+    SEL valueForKeySel = @selector(valueForKey:);
+    id currentItem = ((id (*)(id, SEL, NSString *))objc_msgSend)(self, valueForKeySel, @"_currentItem");
     if (!currentItem) return;
     
     // Check if the current song is disliked
     BOOL isDisliked = NO;
     
-    if ([currentItem respondsToSelector:@selector(likeStatus)]) {
-        NSInteger likeStatus = [[currentItem valueForKey:@"likeStatus"] integerValue];
+    SEL likeStatusSel = NSSelectorFromString(@"likeStatus");
+    if (likeStatusSel && class_getInstanceMethod(object_getClass(currentItem), likeStatusSel)) {
+        NSInteger likeStatus = ((NSInteger (*)(id, SEL))objc_msgSend)(currentItem, likeStatusSel);
         isDisliked = (likeStatus == 2); // 2 typically means disliked
     }
     
@@ -128,7 +132,10 @@ static NSInteger YTMUint(NSString *key) {
         
         // Skip to next song
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self advanceToNextItem];
+            SEL advanceSel = @selector(advanceToNextItem);
+            if (class_getInstanceMethod(object_getClass(self), advanceSel)) {
+                ((void (*)(id, SEL))objc_msgSend)(self, advanceSel);
+            }
         });
     }
 }
@@ -141,6 +148,19 @@ static NSInteger YTMUint(NSString *key) {
     
     if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"skipDislikedSongs")) {
         [self checkIfDislikedAndSkip];
+    }
+    
+    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"discordRPC")) {
+        YTPlayerResponse *response = self.playerResponse;
+        if (response && response.playerData) {
+            id videoDetails = response.playerData.videoDetails;
+            if (videoDetails) {
+                NSString *title = [videoDetails valueForKey:@"title"];
+                NSString *author = [videoDetails valueForKey:@"author"];
+                
+                [[%c(YTMUDiscordRPC) sharedInstance] updatePresenceWithTitle:title artist:author album:nil];
+            }
+        }
     }
 }
 
@@ -158,9 +178,10 @@ static NSInteger YTMUint(NSString *key) {
                 [[%c(YTMToastController) alloc] showMessage:LOC(@"SKIPPED_DISLIKED")];
             });
             
-            // Skip to next
-            if ([self respondsToSelector:@selector(nextVideo)]) {
-                [self nextVideo];
+            // Skip to next using runtime
+            SEL nextVideoSel = NSSelectorFromString(@"nextVideo");
+            if (nextVideoSel && class_getInstanceMethod(object_getClass(self), nextVideoSel)) {
+                ((void (*)(id, SEL))objc_msgSend)(self, nextVideoSel);
             }
         }
     }
@@ -312,25 +333,8 @@ static NSInteger YTMUint(NSString *key) {
 
 %end
 
-// Hook player to update Discord presence
+// Hook player to update Discord presence when playback stops
 %hook YTPlayerViewController
-- (void)playbackController:(id)controller didActivateVideo:(id)video withPlaybackData:(id)data {
-    %orig;
-    
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"discordRPC")) {
-        YTPlayerResponse *response = self.playerResponse;
-        if (response && response.playerData) {
-            id videoDetails = response.playerData.videoDetails;
-            if (videoDetails) {
-                NSString *title = [videoDetails valueForKey:@"title"];
-                NSString *author = [videoDetails valueForKey:@"author"];
-                
-                [[%c(YTMUDiscordRPC) sharedInstance] updatePresenceWithTitle:title artist:author album:nil];
-            }
-        }
-    }
-}
-
 - (void)playbackControllerDidStopPlaying:(id)controller {
     %orig;
     
@@ -386,7 +390,11 @@ static NSInteger YTMUint(NSString *key) {
 
 %new
 - (void)startBulkDownload:(BOOL)audioOnly {
-    NSArray *items = [self valueForKey:@"_playlistItems"] ?: self.playlistItems;
+    SEL valueForKeySel = @selector(valueForKey:);
+    NSArray *items = ((id (*)(id, SEL, NSString *))objc_msgSend)(self, valueForKeySel, @"_playlistItems");
+    if (!items) {
+        items = self.playlistItems;
+    }
     if (!items || items.count == 0) {
         [[%c(YTMToastController) alloc] showMessage:LOC(@"NO_ITEMS_TO_DOWNLOAD")];
         return;
@@ -421,23 +429,6 @@ static NSInteger YTMUint(NSString *key) {
 @end
 
 %hook YTMAppDelegate
-- (void)applicationWillTerminate:(UIApplication *)application {
-    %orig;
-    
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
-        [self clearCacheTo1KB];
-    }
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    %orig;
-    
-    // Also clear cache when app goes to background (optional, but useful)
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
-        [self clearCacheTo1KB];
-    }
-}
-
 %new
 - (void)clearCacheTo1KB {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -524,6 +515,23 @@ static NSInteger YTMUint(NSString *key) {
         
         NSLog(@"[YTMusicUltimate] Cache cleared. Final size: %llu bytes", totalSize);
     });
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    %orig;
+    
+    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
+        [self clearCacheTo1KB];
+    }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    %orig;
+    
+    // Also clear cache when app goes to background (optional, but useful)
+    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
+        [self clearCacheTo1KB];
+    }
 }
 %end
 

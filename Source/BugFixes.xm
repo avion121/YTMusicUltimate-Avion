@@ -221,7 +221,7 @@ static BOOL YTMU(NSString *key) {
     if (self && YTMU(@"YTMUltimateIsEnabled") && YTMU(@"skipWarning")) {
         // Use objc_msgSend to avoid forward declaration issues
         SEL setHiddenSel = @selector(setHidden:);
-        if (class_getInstanceMethod([self class], setHiddenSel)) {
+        if (class_getInstanceMethod(object_getClass(self), setHiddenSel)) {
             ((void (*)(id, SEL, BOOL))objc_msgSend)(self, setHiddenSel, YES);
         }
     }
@@ -237,7 +237,7 @@ static BOOL YTMU(NSString *key) {
     if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"skipWarning")) {
         // Auto-dismiss after a short delay
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            Class cls = [self class];
+            Class cls = object_getClass(self);
             SEL confirmSel = @selector(confirmButtonTapped:);
             SEL dismissSel = @selector(dismissViewControllerAnimated:completion:);
             
@@ -435,7 +435,7 @@ static BOOL YTMU(NSString *key) {
     if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"noAds")) {
         // Skip the ad entirely
         SEL skipAdSel = @selector(skipAd);
-        if (class_getInstanceMethod([self class], skipAdSel)) {
+        if (class_getInstanceMethod(object_getClass(self), skipAdSel)) {
             ((void (*)(id, SEL))objc_msgSend)(self, skipAdSel);
         }
         return;

@@ -3,10 +3,8 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "Headers/YTPlayerViewController.h"
-#import "Headers/YTMWatchViewController.h"
 #import "Headers/YTMToastController.h"
 #import "Headers/Localization.h"
-#import "Headers/YTAlertView.h"
 
 static BOOL YTMU(NSString *key) {
     NSDictionary *dict =
@@ -14,16 +12,7 @@ static BOOL YTMU(NSString *key) {
     return [dict[key] boolValue];
 }
 
-#pragma mark - Feature 1: Always High Audio Quality
-
-@interface YTIMediaQualitySettingOption : NSObject
-@property (nonatomic, assign) NSInteger quality;
-@end
-
-@interface YTMMediaQualityController : NSObject
-- (void)setAudioQuality:(NSInteger)quality;
-- (NSInteger)audioQuality;
-@end
+#pragma mark - Always High Audio Quality
 
 %hook YTMMediaQualityController
 - (NSInteger)audioQuality {
@@ -34,77 +23,40 @@ static BOOL YTMU(NSString *key) {
 }
 
 - (void)setAudioQuality:(NSInteger)quality {
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"alwaysHighQuality")) {
-        %orig(2);
-    } else {
-        %orig;
-    }
+    %orig(YTMU(@"alwaysHighQuality") ? 2 : quality);
 }
 %end
 
-%hook YTMSettings
-- (NSInteger)audioQuality {
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"alwaysHighQuality")) {
-        return 2;
-    }
-    return %orig;
-}
-
-- (void)setAudioQuality:(NSInteger)quality {
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"alwaysHighQuality")) {
-        %orig(2);
-    } else {
-        %orig;
-    }
-}
-
-- (BOOL)isHighQualityAudioEnabled {
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"alwaysHighQuality")) {
-        return YES;
-    }
-    return %orig;
-}
-%end
-
-%hook YTIStreamingData
-- (id)adaptiveFormats {
-    return %orig;
-}
-%end
-
-%hook YTMQualitySettings
-- (BOOL)allowHighQualityAudio {
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"alwaysHighQuality")) {
-        return YES;
-    }
-    return %orig;
-}
-
-- (BOOL)preferHighQualityAudio {
-    if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"alwaysHighQuality")) {
-        return YES;
-    }
-    return %orig;
-}
-%end
-
-#pragma mark - Feature 2: Skip Disliked Songs
+#pragma mark - Skip Disliked Songs
 
 %hook YTMQueueController
+
 %new
 - (void)checkAndSkipDislikedSong {
-    id currentItem = [self valueForKey:@"_currentItem"];
+    SEL valueForKeySel = @selector(valueForKey:);
+    id currentItem =
+        ((id (*)(id, SEL, id))objc_msgSend)(self, valueForKeySel, @"_currentItem");
+
     if (!currentItem) return;
 
-    NSInteger likeStatus = [[currentItem valueForKey:@"likeStatus"] integerValue];
-    if (likeStatus == 2) {
+    SEL likeStatusSel = NSSelectorFromString(@"likeStatus");
+    if (!class_getInstanceMethod(object_getClass(currentItem), likeStatusSel)) return;
+
+    NSInteger status =
+        ((NSInteger (*)(id, SEL))objc_msgSend)(currentItem, likeStatusSel);
+
+    if (status == 2) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[%c(YTMToastController) alloc] showMessage:LOC(@"SKIPPED_DISLIKED")];
+            [[%c(YTMToastController) alloc]
+                showMessage:LOC(@"SKIPPED_DISLIKED")];
         });
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC),
                        dispatch_get_main_queue(), ^{
-            [self advanceToNextItem];
+            SEL nextSel = @selector(advanceToNextItem);
+            if (class_getInstanceMethod(object_getClass(self), nextSel)) {
+                ((void (*)(id, SEL))objc_msgSend)(self, nextSel);
+            }
         });
     }
 }
@@ -113,12 +65,15 @@ static BOOL YTMU(NSString *key) {
     %orig;
 
     if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"skipDislikedSongs")) {
-        [self checkAndSkipDislikedSong];
+        SEL checkSel = @selector(checkAndSkipDislikedSong);
+        if (class_getInstanceMethod(object_getClass(self), checkSel)) {
+            ((void (*)(id, SEL))objc_msgSend)(self, checkSel);
+        }
     }
 }
 %end
 
-#pragma mark - Feature 3: Discord Rich Presence (basic)
+#pragma mark - Discord Presence (storage only)
 
 @interface YTMUDiscordRPC : NSObject
 + (instancetype)sharedInstance;
@@ -130,8 +85,8 @@ static BOOL YTMU(NSString *key) {
 
 + (instancetype)sharedInstance {
     static YTMUDiscordRPC *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
         instance = [self new];
     });
     return instance;
@@ -198,24 +153,22 @@ static BOOL YTMU(NSString *key) {
 }
 %end
 
-#pragma mark - Feature 4: Auto Clear Cache on Close
-
-@interface YTMAppDelegate : UIResponder <UIApplicationDelegate>
-@end
+#pragma mark - Auto Clear Cache
 
 %hook YTMAppDelegate
+
 %new
-- (void)clearCache {
+- (void)ytmu_clearCache {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSString *cachePath =
+        NSString *path =
             NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
                                                 NSUserDomainMask,
                                                 YES).firstObject;
-        if (!cachePath) return;
-
-        [[NSFileManager defaultManager]
-            removeItemAtPath:cachePath
-                       error:nil];
+        if (path) {
+            [[NSFileManager defaultManager]
+                removeItemAtPath:path
+                           error:nil];
+        }
     });
 }
 
@@ -223,7 +176,10 @@ static BOOL YTMU(NSString *key) {
     %orig;
 
     if (YTMU(@"YTMUltimateIsEnabled") && YTMU(@"autoClearCacheOnClose")) {
-        [self clearCache];
+        SEL sel = @selector(ytmu_clearCache);
+        if (class_getInstanceMethod(object_getClass(self), sel)) {
+            ((void (*)(id, SEL))objc_msgSend)(self, sel);
+        }
     }
 }
 %end
@@ -235,17 +191,17 @@ static BOOL YTMU(NSString *key) {
                 [[NSUserDefaults standardUserDefaults]
                     dictionaryForKey:@"YTMUltimate"] ?: @{}];
 
-        NSArray *keys = @[
-            @"alwaysHighQuality",
-            @"skipDislikedSongs",
-            @"discordRPC",
-            @"autoClearCacheOnClose"
-        ];
+        NSDictionary *defaults = @{
+            @"alwaysHighQuality": @NO,
+            @"skipDislikedSongs": @NO,
+            @"discordRPC": @NO,
+            @"autoClearCacheOnClose": @YES
+        };
 
-        for (NSString *key in keys) {
+        for (NSString *key in defaults) {
             // Safety check: ensure key is not nil before using it
             if (key && [key isKindOfClass:[NSString class]] && !dict[key]) {
-                dict[key] = @([key isEqualToString:@"autoClearCacheOnClose"]);
+                dict[key] = defaults[key];
             }
         }
 

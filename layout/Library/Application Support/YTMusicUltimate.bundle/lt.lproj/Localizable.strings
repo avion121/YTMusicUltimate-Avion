@@ -1,0 +1,121 @@
+"SETTINGS" = "Nustatymai";
+"ENABLED" = "Įjungti \"YTMusicUltimate\"";
+"ENABLED_DESC" = "\"Premium\" funkcijos, reklamų panaikinimas, foninis atkūrimas ir kt.";
+"RESTART_FOOTER" = "Iš naujo paleiskite programą, kad pritaikytumėte pakeitimus";
+
+"PREMIUM_SETTINGS" = "\"Premium\" parinktys";
+"NO_ADS" = "Reklamų panaikinimas";
+"NO_ADS_DESC" = "Pašalinti programoje esančias reklamas";
+"BACKGROUND_PLAYBACK" = "Foninis atkūrimas";
+"BACKGROUND_PLAYBACK_DESC" = "Įjungti foninį atkūrimą";
+"FORCE_PREMIUM" = "Priverstinai įjungti premium funkcijas";
+"FORCE_PREMIUM_DESC" = "Priverstinai įjungia premium funcijas.\nŠis nustatymas panaikina Pavyzdžių kotelę";
+
+"PLAYER_SETTINGS" = "Grotuvo nustatymai";
+"DOWNLOAD_AUDIO" = "Atsisiųsti muziką";
+"DOWNLOAD_AUDIO_DESC" = "Prideda galimybę atsisiųti muziką grotuve paspaudžiant YTUltimate mygtuką";
+"DOWNLOAD_COVER" = "Atsisiųsti viršelio atvaizdą";
+"DOWNLOAD_COVER_DESC" = "Prideda galimybę atsisiųsti viršelio atvaizdą grotuve paspaudžiant YTUltimate mygtuką";
+"PLAYBACK_RATE_BUTTON" = "Rodyti atkūrimo spartą";
+"PLAYBACK_RATE_BUTTON_DESC" = "Reguliuoti atkūrimo greitį";
+"SELECTABLE_LYRICS" = "Teksto pasirinkimas";
+"SELECTABLE_LYRICS_DESC" = "Įgalinti teksto pasirinkimą dainų žodžiams";
+"VOLBAR" = "Garsumo juosta";
+"VOLBAR_DESC" = "Įtraukti garsumo juostą grotuve";
+"NO_AUTORADIO" = "Išjungti radiją";
+"NO_AUTORADIO_DESC" = "Išjungti begalinės muzikos funkciją";
+"SKIP_CONTENT_WARNING" = "Praleisti įspėjimą apie turinį";
+"SKIP_CONTENT_WARNING_DESC" = "Praleidžia įspėjimą apie potencialiai pavojingą turinį";
+"AV_DEFAULT_MODE" = "Numatytasis atkūrimo režimas";
+"AUDIO" = "Garsas";
+"VIDEO" = "Vaizdas";
+
+"SKIP_NONMUSIC_PARTS" = "SponsorBlock";
+"SKIP_NONMUSIC_PARTS_DESC" = "Muzikiniuose vaizdo klipuose praleidžiami su muzika nesusiję skyriai";
+"SB_BEHAVIOR" = "Elgsena";
+"SB_SKIP" = "Praleisti";
+"SB_ASK" = "Klausti";
+"SB_NOTIF_DURATION" = "Pranešimo trukmė (sek)";
+
+"SEEK_BUTTONS" = "Pakeisti mygtukus kitas/buvęs mygtukais sukti į priekį/atgal";
+"SEEK_TIME_FOOTER" = "Pasirinkti pasukimo laiką sekundėmis\n\nNumatytieji:\nSukti atgal = 10 sek.\nSukti į priekį = 30 sek.";
+"DEFAULT" = "Numatytasis";
+
+"THEME_SETTINGS" = "Temos parinktys";
+"OLED_DARK_THEME" = "\"OLED\" tamsi tema";
+"OLED_DARK_THEME_DESC" = "Įgalina \"OLED\" tamsiąją temą";
+"OLED_DARK_KEYBOARD" = "\"OLED\" tamsioji klaviatūra";
+"OLED_DARK_KEYBOARD_DESC" = "Įjungiama \"OLED\" tamsioji klaviatūra";
+"LOW_CONTRAST" = "Žemas kontrastas";
+"LOW_CONTRAST_DESC" = "Mažesnis teksto ir mygtukų kontrastingumas";
+
+"NAVBAR_SETTINGS" = "Navigacijos juostos parinktys";
+"DONT_STICK_HEADERS" = "Nefiksuoti antraščių";
+"DONT_STICK_HEADERS_DESC" = "Panaikina antraščių fiksavimą ekrano viršuje";
+"HIDE_HISTORY_BUTTON" = "Paslėpti istorijos mygtuką";
+"HIDE_HISTORY_BUTTON_DESC" = "Naršymo juostoje paslepia istorijos mygtuką";
+"HIDE_CAST_BUTTON" = "Paslėpti \"Cast\" mygtuką";
+"HIDE_CAST_BUTTON_DESC" = "Naršymo juostoje paslepia \"Cast\" mygtuką";
+"HIDE_FILTER_BUTTON" = "Paslėpti rūšiavimo filtro mygtuką";
+"HIDE_FILTER_BUTTON_DESC" = "Navigacijos juostoje paslepia Bibliotekos/Atsisiuntimų filtro mygtuką";
+
+"TABBAR_SETTINGS" = "Kortelių juostos nustatymai";
+"STARTUP_TAB" = "Pradžios kortelė";
+"SAMPLES" = "Pavyzdžiai";
+"HOME" = "Namai";
+"EXPLORE" = "Naršyti";
+"LIBRARY" = "Biblioteka";
+"DOWNLOADS" = "Atsisiuntimai";
+
+"TAB_SETTINGS" = "Kortelių nustatymai";
+"REMOVE_TABBAR_LABELS" = "Nerodyti kortelių pavadinimų";
+"HIDE_HOME" = "Nerodyti Namų kortelės";
+"HIDE_SAMPLES" = "Nerodyti Pavyzdžių koretelės";
+"HIDE_EXPLORE" = "Nerodyti Naršymo kortelės";
+"HIDE_LIBRARY" = "Nerodyti Bibliotekos kortelės";
+"HIDE_DOWNLOADS" = "Nerodyti Atsisiuntimų kortelės";
+
+"CLEAR_CACHE" = "Išvalyti talpyklą";
+
+"APPLY" = "Taikyti";
+"APPLY_DESC" = "Uždaro programėlę, kad pritaikytų pakeitimus";
+
+"LINKS" = "Nuorodos";
+"TWITTER" = "Sekite %@ \"Twitter\"";
+"TWITTER_DESC" = "Sekite mane dėl atnaujinimų";
+"DISCORD" = "Prisijungti prie \"Discord\"";
+"DISCORD_DESC" = "Pranešti apie klaidas ir papildomų funkcijų užklausas";
+"SOURCE_CODE" = "Šaltinio kodas";
+"SOURCE_CODE_DESC" = "Peržiūrėkite kodą";
+
+"CLOSE" = "Uždaryti";
+"WARNING" = "Įspėjimas";
+"LOGIN_INFO" = "Po sėkmingo prisijungimo prie Google paskyros, programą reikia paleisti iš naujo";
+"RETRY_LOGIN" = "Sprendimas aktyvuotas.\n\nBandykite dar kartą.";
+"APPLY_MESSAGE" = "Atlikus šį veiksmą \"YouTube Music\" bus uždaryta, kad būtų galima taikyti pakeitimus. Ar esate tikri?";
+"CANCEL" = "Atšaukti";
+"YES" = "Taip";
+"REGIONAL_RESTRICTION" = "Panašu, kad Youtube Music naudojimas jūsų šalyje yra apribotas.\n\n Prieigai prie YouTube Music naudokite VPN.";
+
+"DONT_RUSH" = "Don't rush brilliance";
+"DONT_RUSH_DESC" = "Required to play the song to extract the link";
+"SELECT_ACTION" = "Pasirinkite veiksmą";
+"DOWNLOADING" = "Atsisiunčiama";
+"DOWNLOAD_PREMIUM" = "Download (Premium required)";
+"OOPS" = "Oi!\nkažkas atsitiko";
+"LINK_NOT_FOUND" = "Link not found";
+"SAVED_TO_PHOTOS" = "Išsaugota Nuotraukose";
+"DONE" = "Atlikta";
+"FOUND_SEGMENT" = "Rastas segmentas nepriklausantis temai";
+"SEGMENT_SKIPPED" = "Segmentas nepriklausantis temai, praleistas";
+"SKIP" = "Praleisti";
+"UNSKIP" = "Sugrąžinti";
+
+"EMPTY" = "Turinys kurį atsisiųsite bus rodomas čia";
+"REMOVE_ALL" = "Panaikinti visą muziką";
+"SHARE_ALL" = "Dalintis visa muzika";
+"PREPARING" = "Ruošiama...";
+"DELETE_MESSAGE" = "Ar esate tikri, kad norite panaikinti %@?";
+"ALL_DOWNLOADS" = "visą atsiųstą muziką"; //keep it lowercase
+"DELETE" = "Panaikinti";
+"RENAME" = "Pervardyti";

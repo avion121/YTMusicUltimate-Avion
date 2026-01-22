@@ -1,0 +1,121 @@
+"SETTINGS" = "Ayarlar";
+"ENABLED" = "YTMusicUltimate'i etkinleştir";
+"ENABLED_DESC" = "Premium özellikler, reklam engelleme, arka planda oynatma vb.";
+"RESTART_FOOTER" = "Değişiklikleri uygulamak için uygulamayı yeniden başlatın";
+
+"PREMIUM_SETTINGS" = "Premium ayarları";
+"NO_ADS" = "Reklam engelleme";
+"NO_ADS_DESC" = "Uygulama içi reklamları kaldırır";
+"BACKGROUND_PLAYBACK" = "Arka planda oynatma";
+"BACKGROUND_PLAYBACK_DESC" = "Arka planda oynatma özelliğini etkinleştirir";
+"FORCE_PREMIUM" = "Premium'u zorla etkinleştir";
+"FORCE_PREMIUM_DESC" = "Premium özellikleri zorla etkinleştirir.\nBu seçenek aynı zamanda Sana Özel sekmesini devre dışı bırakır";
+
+"PLAYER_SETTINGS" = "Oynatıcı ayarları";
+"DOWNLOAD_AUDIO" = "Ses indir";
+"DOWNLOAD_AUDIO_DESC" = "Oynatıcıdaki YTMUltimate butonuna basarak ses indirme özelliğini ekler";
+"DOWNLOAD_COVER" = "Albüm resmi indir";
+"DOWNLOAD_COVER_DESC" = "Oynatıcıdaki YTMUltimate butonuna basarak albüm resmi indirme özelliğini ekler";
+"PLAYBACK_RATE_BUTTON" = "Oynatma hızı düğmesini göster";
+"PLAYBACK_RATE_BUTTON_DESC" = "Oynatma hızını ayarla";
+"SELECTABLE_LYRICS" = "Şarkı sözleri metin seçimi";
+"SELECTABLE_LYRICS_DESC" = "Şarkı sözleri için metin seçimini etkinleştirir";
+"VOLBAR" = "Ses çubuğu";
+"VOLBAR_DESC" = "Oynatıcıya bir ses çubuğu ekler";
+"NO_AUTORADIO" = "Radyoyu devre dışı bırak";
+"NO_AUTORADIO_DESC" = "Kesintisiz müzik özelliğini kaldırır";
+"SKIP_CONTENT_WARNING" = "İçerik uyarısını atla";
+"SKIP_CONTENT_WARNING_DESC" = "Potansiyel zararlı içerik uyarılarını atlar";
+"AV_DEFAULT_MODE" = "Varsayılan oynatma modu";
+"AUDIO" = "Şarkı";
+"VIDEO" = "Video";
+
+"SKIP_NONMUSIC_PARTS" = "SponsorBlock";
+"SKIP_NONMUSIC_PARTS_DESC" = "Müzik videolarında müzik olmayan bölümleri atlar";
+"SB_BEHAVIOR" = "Davranış";
+"SB_SKIP" = "Atla";
+"SB_ASK" = "Sor";
+"SB_NOTIF_DURATION" = "Bildirim süresi (saniye)";
+
+"SEEK_BUTTONS" = "Önceki ve Sonraki düğmelerini Hızlı ileri ve Geri Sar düğmeleriyle değiştir";
+"SEEK_TIME_FOOTER" = "Sarma süresini seçiniz\n\Varsayılanlar:\nGeri Sar = 10 sn.\nHızlı ileri = 30 sn.\n\nButonlara uzun basılarak sonraki ve önceki parçalara geçebilirsiniz.";
+"DEFAULT" = "Varsayılan";
+
+"THEME_SETTINGS" = "Tema ayarları";
+"OLED_DARK_THEME" = "OLED Koyu Tema";
+"OLED_DARK_THEME_DESC" = "OLED Koyu Temasını Etkinleştirir";
+"OLED_DARK_KEYBOARD" = "OLED Koyu Klavye";
+"OLED_DARK_KEYBOARD_DESC" = "OLED Koyu Klavyeyi Etkinleştirir";
+"LOW_CONTRAST" = "Düşük kontrast";
+"LOW_CONTRAST_DESC" = "Metin ve düğmeler için daha düşük kontrast";
+
+"NAVBAR_SETTINGS" = "Gezinme çubuğu ayarları";
+"DONT_STICK_HEADERS" = "Başlıkları sabitleme";
+"DONT_STICK_HEADERS_DESC" = "Sekmelerin üst kısmına sabitlenmiş çubukları ayırır";
+"HIDE_HISTORY_BUTTON" = "Geçmiş düğmesini gizle";
+"HIDE_HISTORY_BUTTON_DESC" = "Gezinme çubuğundaki geçmiş düğmesini gizler";
+"HIDE_CAST_BUTTON" = "Yayınla düğmesini gizle";
+"HIDE_CAST_BUTTON_DESC" = "Gezinme çubuğundaki yayınlama düğmesini gizler";
+"HIDE_FILTER_BUTTON" = "\"Filtrele\" düğmesini gizle";
+"HIDE_FILTER_BUTTON_DESC" = "Gezinme çubuğundaki Kitaplık/İndirilenler düğmesini gizler";
+
+"TABBAR_SETTINGS" = "Sekme çubuğu ayarları";
+"STARTUP_TAB" = "Başlangıç sekmesi";
+"HOME" = "Ana Sayfa";
+"SAMPLES" = "Sana Özel";
+"EXPLORE" = "Keşfet";
+"LIBRARY" = "Kitaplık";
+"DOWNLOADS" = "İndirilenler";
+
+"TAB_SETTINGS" = "Sekme çubuğu";
+"REMOVE_TABBAR_LABELS" = "Etiketsiz sekme çubukları";
+"HIDE_HOME" = "Ana Sayfa Sekmesini Gizle";
+"HIDE_SAMPLES" = "Sana Özel Sekmesini Gizle";
+"HIDE_EXPLORE" = "Keşfet Sekmesini Gizle";
+"HIDE_LIBRARY" = "Kitaplık Sekmesini Gizle";
+"HIDE_DOWNLOADS" = "İndirilenler Sekmesini Gizle";
+
+"CLEAR_CACHE" = "Önbelleği temizle";
+
+"APPLY" = "Uygula";
+"APPLY_DESC" = "Değişiklikleri uygulamak için uygulamayı kapatır.";
+
+"LINKS" = "Bağlantılar";
+"TWITTER" = "Twitter'da %@'i takip edin";
+"TWITTER_DESC" = "Güncellemeler için beni takip edin";
+"DISCORD" = "Discord'a Katılın";
+"DISCORD_DESC" = "Hataları bildirin ve özellikler talep edin";
+"SOURCE_CODE" = "Kaynak kodu";
+"SOURCE_CODE_DESC" = "Koda bir göz atın";
+
+"CLOSE" = "Kapat";
+"WARNING" = "Uyarı";
+"LOGIN_INFO" = "Google hesabına başarılı girişten sonra uygulamanın yeniden başlatılması gerekir";
+"RETRY_LOGIN" = "Çözüm yolu etkinleştirildi.\n\nLütfen tekrar dene.";
+"APPLY_MESSAGE" = "Bu eylem, değişikliklerin uygulanması için YouTube Music'i kapatacak. Devam etmek istediğine emin misin?";
+"CANCEL" = "İptal";
+"YES" = "Evet";
+"REGIONAL_RESTRICTION" = "YouTube Music, ülkende kısıtlanmış gibi görünüyor.\n\nYouTube Music'e erişim sağlamak için lütfen VPN kullan.";
+
+"DONT_RUSH" = "Mükemmellik aceleye gelmez";
+"DONT_RUSH_DESC" = "İndirmeyi başlatmak için şarkıyı çalmak gerkekli";
+"SELECT_ACTION" = "Eylem Seç";
+"DOWNLOADING" = "İndiriliyor";
+"DOWNLOAD_PREMIUM" = "İndir (Premium gerekli)";
+"OOPS" = "Tüh\nbir şeyler ters gitti";
+"LINK_NOT_FOUND" = "Bağlantı bulunamadı";
+"SAVED_TO_PHOTOS" = "Fotoğraflar'a kaydedildi";
+"DONE" = "Bitti";
+"FOUND_SEGMENT" = "Konu dışı bölüm bulundu";
+"SEGMENT_SKIPPED" = "Konu dışı kısım atlandı";
+"SKIP" = "Atla";
+"UNSKIP" = "Atlama";
+
+"EMPTY" = "İndirdiğiniz içerikler burada gözükecek";
+"REMOVE_ALL" = "Tüm sesleri kaldır";
+"SHARE_ALL" = "Tüm sesleri paylaş";
+"PREPARING" = "Hazırlanıyor...";
+"DELETE_MESSAGE" = "Bunu silmek istediğine emin misin: %@?";
+"ALL_DOWNLOADS" = "tüm indirilmiş sesler"; //keep it lowercase
+"DELETE" = "Sil";
+"RENAME" = "Kaydet";

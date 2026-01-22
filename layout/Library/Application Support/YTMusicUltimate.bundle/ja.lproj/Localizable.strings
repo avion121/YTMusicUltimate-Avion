@@ -1,0 +1,121 @@
+"SETTINGS" = "設定";
+"ENABLED" = "有効";
+"ENABLED_DESC" = "プレミアム機能、広告非表示、バックグラウンド再生など";
+"RESTART_FOOTER" = "変更を適用するためにアプリを再起動";
+
+"PREMIUM_SETTINGS" = "プレミアムオプション";
+"NO_ADS" = "広告を非表示";
+"NO_ADS_DESC" = "アプリ内広告を削除";
+"BACKGROUND_PLAYBACK" = "バックグラウンド再生";
+"BACKGROUND_PLAYBACK_DESC" = "バックグラウンド再生を有効化";
+"FORCE_PREMIUM" = "Force enable premium";
+"FORCE_PREMIUM_DESC" = "Forcibly enables premium features.\nThis option also disables Samples tab";
+
+"PLAYER_SETTINGS" = "プレーヤーオプション";
+"DOWNLOAD_AUDIO" = "Download audio";
+"DOWNLOAD_AUDIO_DESC" = "Adds the option to download audio by pressing the YTMUltimate button in the player";
+"DOWNLOAD_COVER" = "Download cover image";
+"DOWNLOAD_COVER_DESC" = "Adds the option to download cover image by pressing the YTMUltimate button in the player";
+"PLAYBACK_RATE_BUTTON" = "再生速度ボタンを表示";
+"PLAYBACK_RATE_BUTTON_DESC" = "再生速度を変更できます";
+"SELECTABLE_LYRICS" = "歌詞のテキスト選択";
+"SELECTABLE_LYRICS_DESC" = "歌詞のテキスト選択を有効にします";
+"VOLBAR" = "ボリュームバー";
+"VOLBAR_DESC" = "プレーヤーにボリュームバーを追加する";
+"NO_AUTORADIO" = "ラジオを無効化する";
+"NO_AUTORADIO_DESC" = "エンドレスミュージック機能を無効化";
+"SKIP_CONTENT_WARNING" = "Skip content warning";
+"SKIP_CONTENT_WARNING_DESC" = "Skips warnings about potentially harmful content";
+"AV_DEFAULT_MODE" = "デフォルトの再生モード";
+"AUDIO" = "音楽";
+"VIDEO" = "映像";
+
+"SKIP_NONMUSIC_PARTS" = "SponsorBlock";
+"SKIP_NONMUSIC_PARTS_DESC" = "ミュージックビデオでの音楽以外のセクションをスキップします";
+"SB_BEHAVIOR" = "Behavior";
+"SB_SKIP" = "Skip";
+"SB_ASK" = "Ask";
+"SB_NOTIF_DURATION" = "Notification duration (sec)";
+
+"SEEK_BUTTONS" = "Replace next/previous with forward and backward buttons";
+"SEEK_TIME_FOOTER" = "Select a seek time in seconds\n\nDefaults:\nSeek backward = 10 sec.\nSeek forward = 30 sec.";
+"DEFAULT" = "Default";
+
+"THEME_SETTINGS" = "テーマオプション";
+"OLED_DARK_THEME" = "有機ELダークテーマ";
+"OLED_DARK_THEME_DESC" = "有機ELダークテーマを有効にします";
+"OLED_DARK_KEYBOARD" = "有機ELダークキーボード";
+"OLED_DARK_KEYBOARD_DESC" = "有機ELダークキーボードを有効にします";
+"LOW_CONTRAST" = "コントラストを下げる";
+"LOW_CONTRAST_DESC" = "文字とボタンのコントラストを下げます";
+
+"NAVBAR_SETTINGS" = "ナビゲーションバーオプション";
+"DONT_STICK_HEADERS" = "Dont stick headers";
+"DONT_STICK_HEADERS_DESC" = "Unsticks pinned at the top of the screen panels";
+"HIDE_HISTORY_BUTTON" = "履歴ボタンを非表示";
+"HIDE_HISTORY_BUTTON_DESC" = "ナビゲーションバーの履歴ボタンを非表示にします";
+"HIDE_CAST_BUTTON" = "キャストボタンを非表示";
+"HIDE_CAST_BUTTON_DESC" = "ナビゲーションバーのキャストボタンを非表示にします";
+"HIDE_FILTER_BUTTON" = "Remove sort filter button";
+"HIDE_FILTER_BUTTON_DESC" = "Removes Library/Downloads filter button from the navigation bar";
+
+"TABBAR_SETTINGS" = "Tab bar options";
+"STARTUP_TAB" = "Startup tab";
+"SAMPLES" = "Samples";
+"HOME" = "Home";
+"EXPLORE" = "Explore";
+"LIBRARY" = "Library";
+"DOWNLOADS" = "Downloads";
+
+"TAB_SETTINGS" = "Tab settings";
+"REMOVE_TABBAR_LABELS" = "No tab bar labels";
+"HIDE_HOME" = "Hide Home tab";
+"HIDE_SAMPLES" = "Hide Samples tab";
+"HIDE_EXPLORE" = "Hide Explore tab";
+"HIDE_LIBRARY" = "Hide Library tab";
+"HIDE_DOWNLOADS" = "Hide Downloads tab";
+
+"CLEAR_CACHE" = "Clear cache";
+
+"APPLY" = "適用";
+"APPLY_DESC" = "アプリを終了して変更を適用します";
+
+"LINKS" = "リンク";
+"TWITTER" = "ツイッターで %@ をフォロー";
+"TWITTER_DESC" = "更新情報を入手する";
+"DISCORD" = "Discordサーバーに参加";
+"DISCORD_DESC" = "バグの報告と機能のリクエスト";
+"SOURCE_CODE" = "ソースコード";
+"SOURCE_CODE_DESC" = "コードを表示する";
+
+"CLOSE" = "閉じる";
+"WARNING" = "警告";
+"LOGIN_INFO" = "App restart required after successful signing into Google account";
+"RETRY_LOGIN" = "Workaround activated.\n\nPlease try again.";
+"APPLY_MESSAGE" = "この操作でYouTube Musicを終了し、変更を適用します。本当にいいですか？";
+"CANCEL" = "キャンセル";
+"YES" = "はい";
+"REGIONAL_RESTRICTION" = "Looks like YouTube Music restricted in your country.\n\n Please use VPN to get access to YouTube Music.";
+
+"DONT_RUSH" = "Don't rush brilliance";
+"DONT_RUSH_DESC" = "Required to play the song to extract the link";
+"SELECT_ACTION" = "Select Action";
+"DOWNLOADING" = "Downloading";
+"DOWNLOAD_PREMIUM" = "Download (Premium required)";
+"OOPS" = "Oops\nsomething went wrong";
+"LINK_NOT_FOUND" = "Link not found";
+"SAVED_TO_PHOTOS" = "Saved to Photos";
+"DONE" = "Done";
+"FOUND_SEGMENT" = "Found offtopic segment";
+"SEGMENT_SKIPPED" = "Offtopic has been skipped";
+"SKIP" = "Skip";
+"UNSKIP" = "Unskip";
+
+"EMPTY" = "Content you download will show here";
+"REMOVE_ALL" = "Remove all audios";
+"SHARE_ALL" = "Share all audios";
+"PREPARING" = "Preparing...";
+"DELETE_MESSAGE" = "Are you sure you want to delete %@?";
+"ALL_DOWNLOADS" = "all download audios"; //keep it lowercase
+"DELETE" = "Delete";
+"RENAME" = "Rename";

@@ -1,0 +1,156 @@
+"SETTINGS" = "Settings";
+"ENABLED" = "Enable YTMusicUltimate";
+"ENABLED_DESC" = "Premium features, no ads, background playback, etc.";
+"RESTART_FOOTER" = "Restart the app to apply changes";
+
+"PREMIUM_SETTINGS" = "Premium options";
+"NO_ADS" = "No ads";
+"NO_ADS_DESC" = "Removes ads in the app";
+"BACKGROUND_PLAYBACK" = "Background playback";
+"BACKGROUND_PLAYBACK_DESC" = "Activates background playback";
+"FORCE_PREMIUM" = "Force enable premium";
+"FORCE_PREMIUM_DESC" = "Forcibly enables premium features.\nThis option also disables Samples tab";
+
+"PLAYER_SETTINGS" = "Player options";
+"DOWNLOAD_AUDIO" = "Download audio";
+"DOWNLOAD_AUDIO_DESC" = "Adds the option to download audio by pressing the YTMUltimate button in the player";
+"DOWNLOAD_COVER" = "Download cover image";
+"DOWNLOAD_COVER_DESC" = "Adds the option to download cover image by pressing the YTMUltimate button in the player";
+"PLAYBACK_RATE_BUTTON" = "Show playback rate button";
+"PLAYBACK_RATE_BUTTON_DESC" = "Adjust playback speed";
+"SELECTABLE_LYRICS" = "Lyrics text selection";
+"SELECTABLE_LYRICS_DESC" = "Enables text selection for lyrics";
+"VOLBAR" = "Volume bar";
+"VOLBAR_DESC" = "Adds a volume bar to the player";
+"NO_AUTORADIO" = "Disable radio";
+"NO_AUTORADIO_DESC" = "Disables endless music feature";
+"SKIP_CONTENT_WARNING" = "Skip content warning";
+"SKIP_CONTENT_WARNING_DESC" = "Skips warnings about potentially harmful content";
+"AV_DEFAULT_MODE" = "Default playback mode";
+"AUDIO" = "Audio";
+"VIDEO" = "Video";
+
+"SKIP_NONMUSIC_PARTS" = "SponsorBlock";
+"SKIP_NONMUSIC_PARTS_DESC" = "Skips non-music sections in music videos";
+"SB_BEHAVIOR" = "Behavior";
+"SB_SKIP" = "Skip";
+"SB_ASK" = "Ask";
+"SB_NOTIF_DURATION" = "Notification duration (sec)";
+
+"SEEK_BUTTONS" = "Replace next/previous with forward and backward buttons";
+"SEEK_TIME_FOOTER" = "Select a seek time in seconds\n\nDefaults:\nSeek backward = 10 sec.\nSeek forward = 30 sec.\n\nSkip to the next and previous tracks available by long-pressing the buttons.";
+"DEFAULT" = "Default";
+
+"THEME_SETTINGS" = "Theme options";
+"OLED_DARK_THEME" = "OLED Dark Theme";
+"OLED_DARK_THEME_DESC" = "Enables OLED Dark Theme";
+"OLED_DARK_KEYBOARD" = "OLED Dark Keyboard";
+"OLED_DARK_KEYBOARD_DESC" = "Enables OLED Dark Keyboard";
+"LOW_CONTRAST" = "Low contrast";
+"LOW_CONTRAST_DESC" = "Lower contrast for text and buttons";
+
+"NAVBAR_SETTINGS" = "Navigation bar options";
+"DONT_STICK_HEADERS" = "Dont stick headers";
+"DONT_STICK_HEADERS_DESC" = "Unsticks pinned at the top of the screen panels";
+"HIDE_HISTORY_BUTTON" = "Hide history button";
+"HIDE_HISTORY_BUTTON_DESC" = "Hides history button in the navigation bar";
+"HIDE_CAST_BUTTON" = "Hide cast button";
+"HIDE_CAST_BUTTON_DESC" = "Hides cast button in the navigation bar";
+"HIDE_FILTER_BUTTON" = "Remove sort filter button";
+"HIDE_FILTER_BUTTON_DESC" = "Removes Library/Downloads filter button from the navigation bar";
+
+"TABBAR_SETTINGS" = "Tab bar options";
+"STARTUP_TAB" = "Startup tab";
+"HOME" = "Home";
+"SAMPLES" = "Samples";
+"EXPLORE" = "Explore";
+"LIBRARY" = "Library";
+"DOWNLOADS" = "Downloads";
+
+"TAB_SETTINGS" = "Tab settings";
+"REMOVE_TABBAR_LABELS" = "Hide labels";
+"HIDE_HOME" = "Hide Home tab";
+"HIDE_SAMPLES" = "Hide Samples tab";
+"HIDE_EXPLORE" = "Hide Explore tab";
+"HIDE_LIBRARY" = "Hide Library tab";
+"HIDE_DOWNLOADS" = "Hide Downloads tab";
+
+"CLEAR_CACHE" = "Clear cache";
+
+"APPLY" = "Apply";
+"APPLY_DESC" = "Closes the app to apply changes";
+
+"LINKS" = "Links";
+"TWITTER" = "Follow %@ on Twitter";
+"TWITTER_DESC" = "Follow me for updates";
+"DISCORD" = "Join the Discord";
+"DISCORD_DESC" = "Report bugs and request features";
+"SOURCE_CODE" = "Source code";
+"SOURCE_CODE_DESC" = "Take a look at the code";
+
+"CLOSE" = "Close";
+"WARNING" = "Warning";
+"LOGIN_INFO" = "App restart required after successful signing into Google account";
+"RETRY_LOGIN" = "Workaround activated.\n\nPlease try again.";
+"APPLY_MESSAGE" = "This action will close YouTube Music to apply changes. Are you sure?";
+"CANCEL" = "Cancel";
+"YES" = "Yes";
+"REGIONAL_RESTRICTION" = "Looks like YouTube Music restricted in your country.\n\n Please use VPN to get access to YouTube Music.";
+
+"DONT_RUSH" = "Don't rush brilliance";
+"DONT_RUSH_DESC" = "Required to play the song to extract the link";
+"SELECT_ACTION" = "Select Action";
+"DOWNLOAD_PREMIUM" = "Download (Premium required)";
+"DOWNLOADING" = "Downloading";
+"OOPS" = "Oops\nsomething went wrong";
+"LINK_NOT_FOUND" = "Link not found";
+"SAVED_TO_PHOTOS" = "Saved to Photos";
+"DONE" = "Done";
+"FOUND_SEGMENT" = "Found offtopic segment";
+"SEGMENT_SKIPPED" = "Offtopic has been skipped";
+"SKIP" = "Skip";
+"UNSKIP" = "Unskip";
+
+"EMPTY" = "Content you download will show here";
+"REMOVE_ALL" = "Remove all audios";
+"SHARE_ALL" = "Share all audios";
+"PREPARING" = "Preparing...";
+"DELETE_MESSAGE" = "Are you sure you want to delete %@?";
+"ALL_DOWNLOADS" = "all download audios"; //keep it lowercase
+"DELETE" = "Delete";
+"RENAME" = "Rename";
+
+// New Features
+"ALWAYS_HIGH_QUALITY" = "Always high quality audio";
+"ALWAYS_HIGH_QUALITY_DESC" = "Forces high quality audio playback regardless of Premium status";
+"SKIP_DISLIKED_SONGS" = "Skip disliked songs";
+"SKIP_DISLIKED_SONGS_DESC" = "Automatically skips songs you've disliked";
+"SKIPPED_DISLIKED" = "Skipped disliked song";
+"PREFER_AUDIO_VERSION" = "Prefer audio-only version";
+"PREFER_AUDIO_VERSION_DESC" = "Prefers audio-only version over music video when available";
+
+"SB_PODCASTS" = "SponsorBlock for podcasts";
+"SB_PODCASTS_DESC" = "Skip sponsor segments, intros, outros in podcasts";
+
+"EXPORT_SETTINGS" = "Export settings";
+"EXPORT_SETTINGS_DESC" = "Share your YTMusicUltimate settings";
+"IMPORT_SETTINGS" = "Import settings";
+"IMPORT_SETTINGS_DESC" = "Import YTMusicUltimate settings from JSON";
+"IMPORT_SETTINGS_INSTRUCTIONS" = "Paste the JSON settings below";
+"PASTE_JSON_HERE" = "Paste JSON here...";
+"NO_SETTINGS_TO_EXPORT" = "No settings to export";
+"INVALID_JSON" = "Invalid JSON format";
+"SETTINGS_IMPORTED" = "Settings imported successfully. Restart the app to apply changes.";
+"IMPORT" = "Import";
+"SUCCESS" = "Success";
+"ERROR" = "Error";
+
+"DISCORD_RPC" = "Discord Rich Presence";
+"DISCORD_RPC_DESC" = "Show currently playing song in Discord status";
+
+"BULK_DOWNLOAD" = "Bulk Download";
+"BULK_DOWNLOAD_DESC" = "Download all songs in this playlist";
+"DOWNLOAD_ALL_AUDIO" = "Download all audio";
+"NO_ITEMS_TO_DOWNLOAD" = "No items to download";
+"STARTING_BULK_DOWNLOAD" = "Starting download of %@ songs...";
+"BULK_DOWNLOAD_COMPLETE" = "Bulk download complete";

@@ -225,7 +225,8 @@ static BOOL YTMU(NSString *key) {
         }
     }
 
-    const unsigned long long targetSize = 1024;
+    // Fix: Change target size from 1024 bytes to 100 MB (100 * 1024 * 1024 bytes)
+    const unsigned long long targetSize = 100 * 1024 * 1024; // 100 MB
 
     [fileInfos sortUsingComparator:^NSComparisonResult(id a, id b) {
         return [b[@"size"] compare:a[@"size"]];
@@ -256,7 +257,7 @@ static BOOL YTMU(NSString *key) {
         [data writeToFile:placeholder atomically:YES];
     }
 
-    NSLog(@"[YTMusicUltimate] Cache cleared (%llu bytes)", totalSize);
+    NSLog(@"[YTMusicUltimate] Cache cleared (%llu bytes remaining)", totalSize);
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

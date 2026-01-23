@@ -17,6 +17,10 @@
 
     self.sponsorBlockValues = [NSMutableDictionary dictionary];
 
+    // Check if currentVideoID is valid before proceeding
+    NSString *videoID = self.currentVideoID;
+    if (!videoID || videoID.length == 0) return;
+
     // Build categories array based on settings
     NSMutableArray *categories = [NSMutableArray arrayWithObject:@"music_offtopic"];
     
@@ -33,20 +37,26 @@
     NSString *categoriesJSON = [NSString stringWithFormat:@"[%@]", [quotedCategories componentsJoinedByString:@","]];
     categoriesJSON = [categoriesJSON stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, categoriesJSON]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", videoID, categoriesJSON]]];
 
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!error) {
             NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            if ([NSJSONSerialization isValidJSONObject:jsonResponse]) {
+            if ([NSJSONSerialization isValidJSONObject:jsonResponse] && videoID) {
                 NSMutableDictionary *segments = [NSMutableDictionary dictionary];
                 for (NSDictionary *segmentDict in jsonResponse) {
                     NSString *uuid = segmentDict[@"UUID"];
-                    [segments setObject:@(1) forKey:uuid];
+                    // Check UUID is not nil before using as dictionary key
+                    if (uuid && [uuid isKindOfClass:[NSString class]]) {
+                        [segments setObject:@(1) forKey:uuid];
+                    }
                 }
 
-                [self.sponsorBlockValues setObject:jsonResponse forKey:self.currentVideoID];
-                [self.sponsorBlockValues setObject:segments forKey:@"segments"];
+                // Only set if videoID is not nil
+                if (videoID) {
+                    [self.sponsorBlockValues setObject:jsonResponse forKey:videoID];
+                    [self.sponsorBlockValues setObject:segments forKey:@"segments"];
+                }
             }
         }
     }] resume];
@@ -67,11 +77,18 @@
 %new
 - (void)skipSegment {
     if (ytmuBool(@"sponsorBlock") && [NSJSONSerialization isValidJSONObject:self.sponsorBlockValues]) {
-        NSDictionary *sponsorBlockValues = [self.sponsorBlockValues objectForKey:self.currentVideoID];
+        NSString *videoID = self.currentVideoID;
+        if (!videoID) return;
+        
+        NSDictionary *sponsorBlockValues = [self.sponsorBlockValues objectForKey:videoID];
         NSMutableDictionary *segmentSkipValues = [self.sponsorBlockValues objectForKey:@"segments"];
+        
+        if (!sponsorBlockValues || !segmentSkipValues) return;
 
         for (NSDictionary *jsonDictionary in sponsorBlockValues) {
             NSString *uuid = [jsonDictionary objectForKey:@"UUID"];
+            if (!uuid) continue;
+            
             NSNumber *segmentSkipValue = [segmentSkipValues objectForKey:uuid];
 
             NSString *category = [jsonDictionary objectForKey:@"category"];

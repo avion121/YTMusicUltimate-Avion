@@ -198,21 +198,8 @@ static BOOL YTMU(NSString *key) {
 
 %new
 - (void)ytmu_clearCache {
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSString *cachePath =
-        NSSearchPathForDirectoriesInDomains(NSCachesDirectory,
-                                            NSUserDomainMask,
-                                            YES).firstObject;
-
-    if (!cachePath) return;
-
-    // Delete the entire cache directory, matching the manual "Clear Cache" behavior
-    NSError *error = nil;
-    if ([fm removeItemAtPath:cachePath error:&error]) {
-        NSLog(@"[YTMusicUltimate] Cache cleared successfully");
-    } else if (error) {
-        NSLog(@"[YTMusicUltimate] Cache clear error: %@", error.localizedDescription);
-    }
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+    [[NSFileManager defaultManager] removeItemAtPath:cachePath error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
